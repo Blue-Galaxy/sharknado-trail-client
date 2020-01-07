@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     maxWidth: 500,
     margin: "auto"
-  }
+  },
 }));
 
 const Login = (props) => {
