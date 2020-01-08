@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     maxWidth: 500,
     margin: "auto"
-  }
+  },
 }));
 
 const Login = (props) => {
@@ -54,7 +54,7 @@ const Login = (props) => {
     axios.post("https://sharknado-trail.herokuapp.com/api/login/", values)
     .then(res => {
         console.log(res.data)
-        localStorage.setItem('token', res.data.token);
+        localStorage.setItem('token', res.data.key);
         props.history.push('/game');
     })
     .catch(err => {

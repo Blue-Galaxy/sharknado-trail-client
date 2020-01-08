@@ -12,11 +12,13 @@ import './App.css';
 function App() {
   return (
     <Router>
-      {/* Public Routes */}
-      <Route exact path ="/" component={Login} />
-      <Route exact path ="/register" component={Registration} />
-      {/* Private Routes */}
-      <Route exact path ="/game" component={Game} />
+      <div className="App">
+        {/* Public Routes */}
+        <Route exact path ="/" component={Login} />
+        <Route exact path ="/register" component={Registration} />
+        {/* Private Routes */}
+        <Route exact path ="/game" component={Game} />
+      </div>
     </Router>
   );
 }
