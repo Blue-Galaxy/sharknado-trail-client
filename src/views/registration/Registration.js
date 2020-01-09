@@ -41,7 +41,8 @@ const Registration = (props) => {
   const classes = useStyles();
   const [values, setValues] = useState({
     username: "",
-    password: ""
+    password1: "",
+    password2: ""
   });
 
   const handleChange = name => event => {
@@ -50,20 +51,23 @@ const Registration = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    localStorage.setItem('username', values.username)
-    axios.post("https://sharknado-trail.herokuapp.com/api/registration/", values)
-    .then(res => {
-        console.log(res.data)
-        localStorage.setItem('token', res.data.token);
-        props.history.push('/game');
-    })
-    .catch(err => {
-        console.log(err);
-    })
+    if(values.password1 != values.password2){
+      alert("Passwords must match. Please try again.");
+    } else {
+      localStorage.setItem('username', values.username)
+      axios.post("https://sharknado-trail.herokuapp.com/api/registration/", values)
+      .then(res => {
+          localStorage.setItem('token', res.data.key);
+          props.history.push('/game');
+      })
+      .catch(err => {
+          console.log(err);
+      })
+    }
   };
 
   return (
-    <div style={{ height: "auto" }} className="login-form">
+    <div style={{ height: "auto" }} className="registration-form">
       <div style={{ backgroundColor: "white", padding: 25 }}>
         <div className={classes.text} style={{}}>
           <Typography variant="h4" gutterBottom align="center">
@@ -87,12 +91,23 @@ const Registration = (props) => {
             fullWidth
           />
           <TextField
-            id="password"
+            id="password1"
             label="Password"
             type="password"
             className={classes.textField}
-            value={values.password}
-            onChange={handleChange("password")}
+            value={values.password1}
+            onChange={handleChange("password1")}
+            margin="normal"
+            variant="outlined"
+            fullWidth
+          />
+          <TextField
+            id="password2"
+            label="Retype Password"
+            type="password"
+            className={classes.textField}
+            value={values.password2}
+            onChange={handleChange("password2")}
             margin="normal"
             variant="outlined"
             fullWidth
@@ -103,6 +118,7 @@ const Registration = (props) => {
             id="submit"
             variant="contained"
             color="primary"
+            type="submit"
             fullWidth
             className={classes.button}
             onClick={e => handleSubmit(e)}
