@@ -17,7 +17,7 @@ function App() {
         <Route exact path ="/" component={Login} />
         <Route exact path ="/register" component={Registration} />
         {/* Private Routes */}
-        <Route exact path ="/game" component={Game} />
+        <PrivateRoute exact path ="/game" component={Game} />
       </div>
     </Router>
   );
